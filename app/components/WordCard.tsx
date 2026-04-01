@@ -1,90 +1,59 @@
 // app/components/WordCard.tsx
 "use client";
+
 import { motion } from "framer-motion";
 
-// フォントのスタイルマップ
-const fontMap: { [key: string]: string } = {
-  serif: "font-serif font-medium", 
-  sans: "font-sans font-black",   
-  mono: "font-mono font-bold",   
-};
+export default function WordCard({ item }: any) {
+  // --- パース関数 ---
+  const parseConfig = (jsonStr: string | undefined) => {
+    if (!jsonStr) return {};
+    try {
+      // 1. JSON文字列をオブジェクトに変換
+      const config = JSON.parse(jsonStr);
 
-type Props = {
-  word: string;
-  color?: string;           // 例: "#ff4500" または "text-blue-500"
-  font?: string;            // 例: "serif", "sans", "mono"
-  animationJson?: string;   // animateプロパティのJSON文字列
-  transitionJson?: string;  // transitionプロパティのJSON文字列
-  initialJson?: string;     // initialプロパティのJSON文字列
-};
-
-/**
- * JSON文字列を安全にパースし、Framer Motionで扱えるオブジェクトに変換する
- */
-const safeJsonParse = (jsonString: string | undefined, fieldName: string): any => {
-  if (!jsonString || jsonString.trim() === "") return undefined;
-  
-  try {
-    // 全角の引用符を半角に変換し、不要な空白を除去
-    const cleanJson = jsonString
-      .replace(/[\u201C\u201D\u201E\u201F]/g, '"')
-      .replace(/[\u2018\u2019\u201A\u201B]/g, "'")
-      .replace(/\s+/g, ' ');
-
-    const obj = JSON.parse(cleanJson);
-
-    // 💡 "Infinity" 文字列を JavaScript の数値 Infinity に変換
-    if (obj && typeof obj === 'object') {
-      Object.keys(obj).forEach(key => {
-        if (obj[key] === "Infinity") {
-          obj[key] = Infinity;
-        }
-      });
+      // 2. "Infinity" という文字列が指定されていたら、JSの Infinity オブジェクトに置換
+      if (config.repeat === "Infinity") {
+        config.repeat = Infinity;
+      }
+      
+      return config;
+    } catch (e) {
+      console.error("❌ JSON Parse Error:", e, "Raw String:", jsonStr);
+      return {};
     }
-    return obj;
-  } catch (e) {
-    console.error(`[WordCard] ${fieldName} のパースに失敗しました:`, e);
-    return undefined;
-  }
-};
+  };
 
-export default function WordCard({ 
-  word, 
-  color, 
-  font, 
-  animationJson, 
-  transitionJson, 
-  initialJson 
-}: Props) {
-  
-  // 各プロパティをパース
-  const customAnimate = safeJsonParse(animationJson, "animate");
-  const customTransition = safeJsonParse(transitionJson, "transition");
-  const customInitial = safeJsonParse(initialJson, "initial");
+  const anim = parseConfig(item.customAnimation);
+  const trans = parseConfig(item.customTransition);
 
-  // デバッグ用ログ（動きが確認できたら削除してOK）
-  console.log(`--- Debug: ${word} ---`);
-  console.log("Animate:", customAnimate);
-  console.log("Transition:", customTransition);
-
-  // 色の判定（#始まりならインラインスタイル、それ以外はTailwindクラスとして扱う）
-  const textColor = color && color.startsWith("#") ? color : undefined;
-  const tailwindColorClass = color && !color.startsWith("#") ? color : "text-slate-800";
-  
-  // フォントクラスの決定
-  const fontClass = fontMap[font || "sans"] || fontMap.sans;
+  // フォントと色の設定
+  const color = item.customColor || "#0f172a";
+  const fontFamily = Array.isArray(item.customFont) ? item.customFont[0] : (item.customFont || "sans-serif");
 
   return (
-    <div className="perspective-1000 py-10 flex items-center justify-center w-full h-full">
-      <motion.h2
-        initial={customInitial}
-        animate={customAnimate}
-        transition={customTransition}
-        style={{ color: textColor }}
-        className={`text-7xl md:text-[10rem] select-none cursor-default leading-none tracking-tighter ${fontClass} ${tailwindColorClass}`}
-      >
-        {word}
-      </motion.h2>
+    <div className="relative group flex flex-col items-center justify-center">
+      <div className="relative">
+        <motion.h2 
+          key={item.id} // 単語切り替え時にアニメーションをリセット
+          animate={anim}
+          transition={trans}
+          className="text-7xl md:text-9xl font-black tracking-tighter leading-none text-center"
+          style={{ 
+            color: color, 
+            fontFamily: fontFamily,
+            filter: `drop-shadow(0 20px 40px ${color}33)`,
+            display: "block"
+          }}
+        >
+          {item.word}
+        </motion.h2>
+        
+        {/* 下線の装飾（オプション） */}
+        <div 
+          className="h-2 w-12 mx-auto mt-8 rounded-full opacity-20"
+          style={{ backgroundColor: color }}
+        />
+      </div>
     </div>
   );
 }

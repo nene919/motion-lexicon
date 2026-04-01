@@ -1,111 +1,72 @@
 // app/components/SearchAndFilter.tsx
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-type Word = {
-  id: string;
-  word: string;
-  difficulty: number;
-};
-
-type Props = {
-  initialAlpha: string;
+// 💡 型定義に onSearchChange を追加します
+type SearchAndFilterProps = {
   initialLevel: string;
-  words: Word[];
+  words: any[];
+  onSearchChange?: (query: string) => void; // 検索入力時に呼ばれる関数（任意）
 };
 
-export default function SearchAndFilter({ initialAlpha, initialLevel, words }: Props) {
-  const [searchQuery, setSearchQuery] = useState("");
+export default function SearchAndFilter({ 
+  initialLevel, 
+  words, 
+  onSearchChange 
+}: SearchAndFilterProps) {
+  const router = useRouter();
 
-  // リアルタイム検索（英単語のみ対象）
-  const filteredWords = words.filter((item) =>
-    item.word.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const levels = [1, 2, 3, 4, 5];
-
-  const getFilterUrl = (alpha: string | null, lv: string | null) => {
-    const params = new URLSearchParams();
-    if (alpha) params.set("initial", alpha);
-    if (lv) params.set("level", lv);
-    const queryString = params.toString();
-    return queryString ? `/?${queryString}` : "/";
+  const handleLevelChange = (level: string) => {
+    if (level === "") {
+      router.push("/");
+    } else {
+      router.push(`/?level=${level}`);
+    }
   };
 
-  return (
-    <div className="px-8 py-12 max-w-7xl mx-auto space-y-8">
-      
-      {/* 🔍 検索 & レベル選択 (進捗バーは削除) */}
-      <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-        <div className="relative w-full lg:w-80">
-          <input
-            type="text"
-            placeholder="Search word..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-6 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-1 focus:ring-slate-900 transition-all outline-none"
-          />
-        </div>
+  const levels = [
+    { value: "", label: "ALL LEVELS" },
+    { value: "1", label: "LEVEL 1" },
+    { value: "2", label: "LEVEL 2" },
+    { value: "3", label: "LEVEL 3" },
+  ];
 
-        <div className="flex items-center gap-2">
-          {levels.map((lv) => (
-            <Link
-              key={lv}
-              href={getFilterUrl(initialAlpha, String(lv))}
-              className={`w-9 h-9 flex items-center justify-center rounded-lg text-[10px] font-black transition-all ${
-                Number(initialLevel) === lv 
-                ? "bg-slate-900 text-white" 
-                : "bg-slate-50 text-slate-300 hover:text-slate-900"
-              }`}
-            >
-              {lv}
-            </Link>
-          ))}
-          {(initialAlpha || initialLevel) && (
-            <Link href="/" className="ml-4 text-[10px] font-black text-slate-300 hover:text-red-500 uppercase tracking-widest">Reset</Link>
-          )}
-        </div>
+  return (
+    <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row gap-6 items-center justify-between">
+      {/* Search Input */}
+      <div className="relative w-full md:max-w-md group">
+        <span className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-blue-500 transition-colors">
+          🔍
+        </span>
+        <input
+          type="text"
+          placeholder="SEARCH WORDS OR MEANINGS..."
+          onChange={(e) => onSearchChange?.(e.target.value)} // 入力値を親へ渡す
+          className="w-full bg-white border border-slate-100 py-4 pl-14 pr-6 rounded-full text-[10px] font-black tracking-widest focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50/50 transition-all shadow-sm"
+        />
       </div>
 
-      {/* 🔤 A-Z ナビ */}
-      <div className="flex flex-wrap gap-1.5 justify-center py-4 border-y border-slate-50">
-        {alphabet.map((char) => (
-          <Link
-            key={char}
-            href={getFilterUrl(char, initialLevel)}
-            className={`w-7 h-7 flex items-center justify-center rounded-md text-[10px] font-black transition-all ${
-              initialAlpha === char ? "bg-slate-900 text-white" : "text-slate-200 hover:text-slate-900"
+      {/* Level Filter Buttons */}
+      <div className="flex gap-2 p-1.5 bg-slate-100/50 rounded-full border border-slate-100 w-fit">
+        {levels.map((lvl) => (
+          <button
+            key={lvl.value}
+            onClick={() => handleLevelChange(lvl.value)}
+            className={`px-6 py-2.5 rounded-full text-[9px] font-black tracking-widest transition-all uppercase ${
+              initialLevel === lvl.value
+                ? "bg-white text-slate-900 shadow-sm"
+                : "text-slate-400 hover:text-slate-600"
             }`}
           >
-            {char}
-          </Link>
+            {lvl.label}
+          </button>
         ))}
       </div>
 
-      {/* 🗂️ 単語グリッド (カード高さを低縮小・情報を削除) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 pt-6">
-        {filteredWords.map((item) => (
-          <Link
-            key={item.id}
-            href={`/vocabulary/${item.id}`}
-            className="group relative bg-white border border-slate-100 rounded-2xl px-6 py-8 h-32 flex items-center justify-center hover:border-slate-900 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-          >
-            {/* 背景の薄い数字（難易度）をさりげなく配置 */}
-            <span className="absolute top-2 left-4 text-[10px] font-black text-slate-100 group-hover:text-slate-200 transition-colors uppercase tracking-widest">
-              Lv.{item.difficulty}
-            </span>
-
-            <h3 className="text-xl font-bold text-slate-800 tracking-tighter group-hover:text-slate-900 transition-colors relative z-10">
-              {item.word}
-            </h3>
-
-            {/* 装飾: ホバー時にのみ現れる細いライン */}
-            <div className="absolute bottom-0 left-0 w-0 h-1 bg-slate-900 group-hover:w-full transition-all duration-500" />
-          </Link>
-        ))}
+      {/* Results Count */}
+      <div className="hidden lg:block text-[9px] font-black text-slate-300 tracking-[0.3em] uppercase">
+        {words.length} Entries Loaded
       </div>
     </div>
   );

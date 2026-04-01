@@ -1,6 +1,6 @@
 // app/components/CustomQuizSection.tsx
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import WordCarousel from "./WordCarousel";
 
 export default function CustomQuizSection({ allWords }: { allWords: any[] }) {
@@ -13,21 +13,26 @@ export default function CustomQuizSection({ allWords }: { allWords: any[] }) {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-        <h2 className="text-[10px] font-black tracking-widest text-green-600 uppercase">Custom Deck Quiz</h2>
-        <button onClick={loadCustomQuiz} className="px-6 py-2 bg-green-500 text-white text-[10px] font-black rounded-full hover:bg-green-600 transition-all uppercase tracking-widest">
-          Load Marked Words
+    <div className="space-y-8 animate-in fade-in duration-700">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-6">
+        <h2 className="text-[10px] font-black tracking-widest text-green-600 uppercase">Custom Deck</h2>
+        <button 
+          onClick={loadCustomQuiz} 
+          className="px-8 py-3 bg-green-500 text-white text-[10px] font-black rounded-full hover:bg-green-600 transition-all uppercase tracking-widest shadow-lg shadow-green-100"
+        >
+          🔄 Load Marked Words
         </button>
       </div>
 
       {markedWords.length > 0 ? (
-        <div className="study-target-custom blur-xl transition-all duration-700">
-           <WordCarousel words={markedWords} />
-        </div>
+        <WordCarousel 
+          words={markedWords} 
+          sectionId="custom-deck-carousel" 
+          isQuizMode={true} 
+        />
       ) : (
-        <div className="h-40 flex items-center justify-center border-2 border-dashed border-slate-100 rounded-[2rem] text-slate-300 text-[10px] font-black tracking-widest uppercase">
-          No marked words found
+        <div className="h-64 flex flex-col items-center justify-center border-2 border-dashed border-slate-100 rounded-[3rem] bg-slate-50/30 text-slate-300">
+          <p className="text-[10px] font-black tracking-widest uppercase text-center">No marked words found</p>
         </div>
       )}
     </div>
