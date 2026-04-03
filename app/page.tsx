@@ -78,34 +78,27 @@ export default async function Home({
       />
 
       {/* --- 4. FOOTER --- */}
-      <footer className="bg-slate-900 text-slate-400 py-24 px-8 mt-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-            <div className="col-span-2 space-y-6">
-              <h2 className="text-white text-2xl font-bold tracking-tighter">うごく英単語帖.</h2>
-              <p className="text-sm max-w-sm leading-relaxed opacity-70">
-                英単語に動きを、学びに驚きを。視覚と音で体験する新しいアーカイブ。
-              </p>
+      <footer className="w-full py-16 px-10 border-t border-[#dee2e6] bg-white mt-20">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+          
+          {/* 左側：ロゴとコピーライト */}
+          <div className="flex flex-col gap-3">
+            <div className="text-sm font-[800] text-[#1a1c1e] font-display uppercase tracking-widest">
+              Moving Vocab
             </div>
-            <div className="space-y-6">
-              <h3 className="text-white text-[10px] font-black tracking-widest uppercase">Legal</h3>
-              <ul className="text-sm space-y-3">
-                <li><Link href="/privacy" className="hover:text-white transition-colors">プライバシーポリシー</Link></li>
-                <li><Link href="/terms" className="hover:text-white transition-colors">免責事項</Link></li>
-              </ul>
-            </div>
-            <div className="space-y-6">
-              <h3 className="text-white text-[10px] font-black tracking-widest uppercase">Support</h3>
-              <ul className="text-sm space-y-3">
-                <li><Link href="/contact" className="hover:text-white transition-colors">お問い合わせ</Link></li>
-                <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub Repository</a></li>
-              </ul>
-            </div>
+            <p className="font-body text-[11px] text-[#74777f] uppercase tracking-wider">
+              © 2024 Kinetic Learning Lab. All Rights Reserved.
+            </p>
           </div>
-          <div className="pt-10 border-t border-slate-800 text-[10px] font-medium tracking-[0.4em] flex flex-col md:flex-row justify-between items-center gap-4 uppercase opacity-50">
-            <p>&copy; 2026 うごく英単語帖 PROJECT</p>
-            <p>DESIGNED FOR MOTION INTERFACE</p>
+
+          {/* 右側：リンクメニュー */}
+          <div className="flex flex-wrap gap-x-8 gap-y-4 font-display text-xs font-[700] uppercase tracking-widest">
+            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Contact</a>
+            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Terms</a>
+            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Privacy</a>
+            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Help</a>
           </div>
+
         </div>
       </footer>
     </main>

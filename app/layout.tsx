@@ -9,7 +9,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      <body className="antialiased">{children}</body>
+      <head>
+        {/* Google Fonts を直接インポート (sample.html と同じ構成) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be_Vietnam_Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+      </head>
+      {/* globals.css で設定した font-body を適用 */}
+      <body className="antialiased font-body">
+        {children}
+      </body>
     </html>
   );
 }
