@@ -47,12 +47,6 @@ export default function WordCard({ item }: any) {
         >
           {item.word}
         </motion.h2>
-        
-        {/* 下線の装飾（オプション） */}
-        <div 
-          className="h-2 w-12 mx-auto mt-8 rounded-full opacity-20"
-          style={{ backgroundColor: color }}
-        />
       </div>
     </div>
   );

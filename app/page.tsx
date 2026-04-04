@@ -2,6 +2,7 @@
 import { client } from "@/lib/client";
 import WordCarousel from "@/app/components/WordCarousel";
 import MainContent from "@/app/components/MainContent";
+import TopNav from "@/app/components/TopNav";
 import Link from "next/link";
 
 export const revalidate = 0;
@@ -9,10 +10,13 @@ export const revalidate = 0;
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ level?: string }>;
+  searchParams: Promise<{ level?: string; tab?: string }>;
 }) {
   const resolvedParams = await searchParams;
   const level = resolvedParams.level || "";
+  const tabParam = resolvedParams.tab;
+  const initialTab =
+    tabParam === "quiz" || tabParam === "custom" ? tabParam : "archive";
 
   let allWords = [];
   let randomPickups = [];
@@ -38,21 +42,25 @@ export default async function Home({
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      
-      {/* --- 1. タイトルとサブタイトル (一番上) --- */}
-      <header className="pt-20 pb-10 px-8 max-w-7xl mx-auto border-b border-slate-50">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black tracking-[0.3em] text-blue-600 uppercase bg-blue-50 px-2 py-0.5 rounded">
-              System v1.0
+      <TopNav />
+
+      {/* --- 1. ヒーロー（コンパクト） --- */}
+      <header className="pt-20 px-6 md:px-8 pb-8 bg-white">
+        <div className="max-w-7xl mx-auto space-y-3">
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-on-surface leading-snug font-display">
+            サイトについて
+          </h1>
+          <p className="text-sm md:text-[15px] text-on-surface-variant leading-relaxed font-light font-body max-w-2xl">
+            英単語の意味だけでなく、「どう動くのか」をアニメーション付きで体感できるミニマルな語彙プラットフォームです。
+          </p>
+          <div className="inline-flex items-center gap-2 rounded-md bg-surface-container-low border border-surface-container-highest px-3 py-1.5">
+            <span className="text-[10px] uppercase tracking-widest font-bold text-outline font-display">
+              掲載語数
+            </span>
+            <span className="text-base font-extrabold text-on-surface font-display tabular-nums">
+              {allWords.length.toLocaleString()}語
             </span>
           </div>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-slate-900">
-            うごく英単語帖
-          </h1>
-          <p className="text-lg font-bold text-slate-400 tracking-tight">
-            言葉の「動き」を記憶に刻む、視覚的な語彙ギャラリー
-          </p>
         </div>
       </header>
 
@@ -60,7 +68,7 @@ export default async function Home({
       <section className="py-16 bg-slate-50/50 border-b border-slate-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 mb-10">
           <div className="flex items-center gap-4">
-            <h2 className="text-xl font-black tracking-tighter text-slate-900 uppercase">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-6 font-display">
               Today's Pickups.
             </h2>
             <div className="h-[1px] flex-grow bg-slate-200" />
@@ -78,7 +86,7 @@ export default async function Home({
       />
 
       {/* --- 4. FOOTER --- */}
-      <footer className="w-full py-16 px-10 border-t border-[#dee2e6] bg-white mt-20">
+      <footer className="w-full py-16 px-10 mt-20 border-t border-indigo-200/50 bg-gradient-to-r from-indigo-50 via-sky-50/90 to-cyan-50 shadow-[0_-6px_28px_-10px_rgba(79,70,229,0.12)]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
           
           {/* 左側：ロゴとコピーライト */}
@@ -93,9 +101,15 @@ export default async function Home({
 
           {/* 右側：リンクメニュー */}
           <div className="flex flex-wrap gap-x-8 gap-y-4 font-display text-xs font-[700] uppercase tracking-widest">
-            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Contact</a>
-            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Terms</a>
-            <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Privacy</a>
+            <Link className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="/contact">
+              Contact
+            </Link>
+            <Link className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="/terms">
+              Terms
+            </Link>
+            <Link className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="/privacy">
+              Privacy
+            </Link>
             <a className="text-[#44474e] hover:text-[#1a1c1e] transition-colors" href="#">Help</a>
           </div>
 

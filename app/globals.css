@@ -14,11 +14,26 @@
   --font-display: "Plus Jakarta Sans", sans-serif;
   --font-body: "Be Vietnam Pro", sans-serif;
   --color-primary: var(--primary);
+  /* bg-primary 上の文字色（Tailwind v4 の @theme で明示しないと text-on-primary が効かないことがある） */
+  --color-on-primary: #ffffff;
   --color-surface-container-low: var(--surface-container-low);
   --color-surface-container-highest: var(--surface-container-highest);
 }
 
 @layer base {
+  /* Material Symbols（layout で読み込んだフォントを確実に適用） */
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.25rem;
+    line-height: 1;
+    letter-spacing: normal;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+  }
+
   body {
     /* 本文からすでに太めにするのが sample.html 流 */
     font-family: "Be Vietnam Pro", sans-serif;

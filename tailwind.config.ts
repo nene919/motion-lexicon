@@ -14,13 +14,14 @@ const config: Config = {
         "on-primary": "#ffffff",
         surface: "#ffffff",
         "surface-container-lowest": "#ffffff",
-        "surface-container-low": "#f7f9fa",
+        "surface-container-low": "#f0f2f4",
         "surface-container": "#f0f2f4",
         "surface-container-high": "#e9ecef",
         "surface-container-highest": "#dee2e6",
         "on-surface": "#1a1c1e",
         "on-surface-variant": "#44474e",
         outline: "#74777f",
+        "outline-variant": "#c4c7cf",
 
         // 2. 既存コードとの互換性のために ks 系も維持（中身は新しいカラーへ紐付け）
         ks: {

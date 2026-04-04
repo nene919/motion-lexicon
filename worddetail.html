@@ -1,0 +1,256 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Jump - Moving Vocabulary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-dim": "#44474e",
+                        "secondary-container": "#f1f3f4",
+                        "surface-variant": "#dee2e6",
+                        "primary-fixed-dim": "#c4c7cf",
+                        "primary-fixed": "#e1e2e1",
+                        "on-primary-container": "#1a1c1e",
+                        "secondary-fixed-dim": "#dee2e6",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#44474e",
+                        "on-secondary-container": "#1a1c1e",
+                        "on-surface-variant": "#44474e",
+                        "tertiary-fixed": "#e8eaed",
+                        "on-primary": "#ffffff",
+                        "secondary": "#44474e",
+                        "surface-bright": "#ffffff",
+                        "tertiary-container": "#e8eaed",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e8eaed",
+                        "surface-container-low": "#f8f9fa",
+                        "outline": "#74777f",
+                        "surface-container-highest": "#dee2e6",
+                        "on-surface": "#1a1c1e",
+                        "inverse-surface": "#1a1c1e",
+                        "background": "#ffffff",
+                        "on-tertiary-container": "#1a1c1e",
+                        "on-secondary-fixed": "#1a1c1e",
+                        "secondary-fixed": "#f1f3f4",
+                        "surface-tint": "#2d3335",
+                        "surface": "#ffffff",
+                        "surface-dim": "#dee2e6",
+                        "tertiary-fixed-dim": "#dee2e6",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#1a1c1e",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#74777f",
+                        "on-background": "#1a1c1e",
+                        "outline-variant": "#c4c7cf",
+                        "on-error-container": "#410002",
+                        "primary-container": "#e1e2e1",
+                        "primary-dim": "#2d3335",
+                        "on-tertiary-fixed": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f8f9fa",
+                        "error-dim": "#ffb4ab",
+                        "tertiary": "#74777f",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#2d3335",
+                        "inverse-primary": "#ffffff",
+                        "tertiary-dim": "#74777f",
+                        "on-primary-fixed-variant": "#2d3335",
+                        "surface-container": "#f1f3f4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcfcfc;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .font-plus-jakarta-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-be-vietnam-pro { font-family: 'Be Vietnam Pro', sans-serif; }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md dark:bg-neutral-900/90 border-b border-neutral-100">
+<div class="flex justify-between items-center px-10 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-extrabold tracking-tighter text-neutral-900 dark:text-neutral-50 font-plus-jakarta-sans" style="">
+                Moving Vocabulary
+            </div>
+<div class="hidden md:flex gap-12">
+<a class="text-neutral-400 dark:text-neutral-500 font-medium font-plus-jakarta-sans tracking-tight uppercase text-[11px] hover:text-neutral-900 transition-colors duration-300" href="#" style="">Home</a>
+<a class="text-neutral-400 dark:text-neutral-500 font-medium font-plus-jakarta-sans tracking-tight uppercase text-[11px] hover:text-neutral-900 transition-colors duration-300" href="#" style="">Quizzes</a>
+<a class="text-neutral-400 dark:text-neutral-500 font-medium font-plus-jakarta-sans tracking-tight uppercase text-[11px] hover:text-neutral-900 transition-colors duration-300" href="#" style="">About</a>
+</div>
+<button class="scale-95 transition-transform duration-200 active:scale-90 bg-primary text-on-primary px-8 py-3 rounded-full font-plus-jakarta-sans tracking-tight uppercase text-[11px] font-bold" style="">
+                Get Started
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-10 max-w-5xl mx-auto">
+<!-- Navigation Back Link -->
+<div class="mb-16">
+<a class="group inline-flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-tertiary hover:text-primary transition-colors" href="#" style="">
+<span class="material-symbols-outlined !text-[16px]" style="">arrow_back</span>
+                Back to Library
+            </a>
+</div>
+<!-- Word Detail Section -->
+<div class="flex flex-col gap-20">
+<!-- Central Focus: Word Card (Updated: Focused word area) -->
+<section class="relative group">
+<div class="relative bg-white py-24 px-12 md:px-24 rounded-lg border border-surface-container-highest flex flex-col items-center justify-center text-center overflow-hidden">
+<div class="flex flex-col items-center gap-8">
+<div class="flex items-center gap-6">
+<!-- Speaker Icon -->
+<button class="p-4 hover:bg-surface-container transition-colors rounded-full text-tertiary hover:text-primary" style="">
+<span class="material-symbols-outlined text-4xl" style="">volume_up</span>
+</button>
+<h1 class="text-[6rem] md:text-[8rem] font-extrabold font-headline tracking-tighter text-primary leading-none" style="">
+                                Jump
+                            </h1>
+<!-- Bookmark Icon -->
+<button class="p-4 hover:bg-surface-container transition-colors rounded-full text-tertiary hover:text-primary" style="">
+<span class="material-symbols-outlined text-4xl" style="">bookmark</span>
+</button>
+</div>
+<div class="italic font-medium text-tertiary text-2xl font-headline opacity-40" style=""><br></div>
+</div>
+</div>
+</section>
+<!-- Detailed Information Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 items-start">
+<!-- Definition & Examples Column -->
+<div class="md:col-span-7 flex flex-col gap-12">
+<!-- Japanese Meaning -->
+<div>
+<span class="font-label text-[10px] tracking-widest uppercase text-tertiary mb-3 block" style="">Japanese Meaning</span>
+<p class="text-[2rem] font-headline font-bold text-on-surface leading-tight mb-2" style="">
+                            跳ぶ、ジャンプする
+                        </p>
+<p class="text-tertiary font-body italic" style="">地面を蹴って空中に舞い上がること。</p>
+</div>
+<!-- English Definition (Hierarchy Updated) -->
+<div class="pt-8 border-t border-surface-container-highest">
+<span class="font-label text-[10px] tracking-widest uppercase text-tertiary mb-3 block" style="">English Definition</span>
+<p class="text-xl font-headline font-semibold text-on-surface leading-relaxed" style="">
+                            To push oneself off a surface and into the air by using the muscles in one's legs and feet.
+                        </p>
+</div>
+<!-- Example Sentences -->
+<div class="pt-8 border-t border-surface-container-highest">
+<span class="font-label text-[10px] tracking-widest uppercase text-tertiary mb-6 block" style="">Example Sentences</span>
+<div class="space-y-10">
+<div class="relative pl-8">
+<div class="absolute left-0 top-3 w-4 h-[1px] bg-outline-variant"></div>
+<p class="text-lg text-on-surface font-body font-medium" style="">The frog can jump very high.</p>
+<p class="text-tertiary mt-2 font-body italic text-sm" style="">そのカエルはとても高く跳ぶことができます。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Content -->
+<div class="md:col-span-4 md:col-start-9 flex flex-col gap-10">
+<!-- Metadata -->
+<div class="flex flex-col gap-8 bg-surface-container-low p-10 rounded-lg">
+<div>
+<span class="font-label text-[10px] tracking-widest uppercase text-tertiary mb-4 block" style="">Difficulty</span>
+<div class="inline-flex items-center px-5 py-2.5 bg-primary text-on-primary rounded-full">
+<span class="font-headline font-bold text-xs" style="">B1</span>
+<div class="w-[1px] h-3 bg-white/20 mx-3"></div>
+<span class="font-label text-[9px] tracking-widest uppercase font-bold" style="">Intermediate</span>
+</div>
+</div>
+<div class="space-y-6 pt-6 border-t border-surface-container-highest">
+<div>
+<span class="font-label text-[10px] tracking-widest uppercase text-tertiary mb-1 block" style="">Created</span>
+<span class="font-headline font-bold text-sm text-primary" style="">2024.03.15</span>
+</div>
+<div>
+<span class="font-label text-[10px] tracking-widest uppercase text-tertiary mb-1 block" style="">Updated</span>
+<span class="font-headline font-bold text-sm text-primary" style="">2024.03.15</span>
+</div>
+</div>
+</div>
+<!-- Advertisement Placeholder Area (Dedicated Sidebar Position) -->
+<div class="bg-surface-container-highest/20 border border-dashed border-outline-variant rounded-lg p-10 flex flex-col items-center justify-center text-center min-h-[300px]">
+<span class="font-label text-[9px] tracking-widest uppercase text-tertiary mb-6" style="">Advertisement</span>
+<div class="w-full h-40 bg-white/50 rounded-lg mb-4 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant opacity-30 text-4xl" style="">image</span>
+</div>
+<div class="text-tertiary/40 italic font-body text-[10px] uppercase tracking-widest" style="">Sponsored Space</div>
+</div>
+</div>
+</section>
+
+<!-- Random Word Discovery Section (Added: Random selection from library) -->
+<section class="mt-12 bg-surface-container-low/50 -mx-6 md:-mx-10 px-6 md:px-10 py-24">
+<div class="max-w-5xl mx-auto">
+<div class="flex items-center justify-between mb-12">
+<h2 class="text-3xl font-headline font-extrabold tracking-tight text-primary" style="">Discover More</h2>
+<a class="font-label text-[10px] tracking-widest uppercase text-tertiary hover:text-primary transition-colors flex items-center gap-2" href="#" style="">
+                            Explore Library <span class="material-symbols-outlined !text-[14px]" style="">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<!-- Discover Card 1 -->
+<a class="group bg-white p-8 rounded-lg border border-surface-container flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300" href="#" style="">
+<span class="font-label text-[9px] tracking-widest uppercase text-tertiary/60" style="">Motion</span>
+<div class="text-2xl font-headline font-black text-primary" style="">Sprint</div>
+<div class="text-xs text-tertiary italic" style="">全速力で走る</div>
+</a>
+<!-- Discover Card 2 -->
+<a class="group bg-white p-8 rounded-lg border border-surface-container flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300" href="#" style="">
+<span class="font-label text-[9px] tracking-widest uppercase text-tertiary/60" style="">Nature</span>
+<div class="text-2xl font-headline font-black text-primary" style="">Bloom</div>
+<div class="text-xs text-tertiary italic" style="">花が咲く</div>
+</a>
+<!-- Discover Card 3 -->
+<a class="group bg-white p-8 rounded-lg border border-surface-container flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300" href="#" style="">
+<span class="font-label text-[9px] tracking-widest uppercase text-tertiary/60" style="">State</span>
+<div class="text-2xl font-headline font-black text-primary" style="">Still</div>
+<div class="text-xs text-tertiary italic" style="">静止した</div>
+</a>
+<!-- Discover Card 4 -->
+<a class="group bg-white p-8 rounded-lg border border-surface-container flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300" href="#" style="">
+<span class="font-label text-[9px] tracking-widest uppercase text-tertiary/60" style="">Action</span>
+<div class="text-2xl font-headline font-black text-primary" style="">Grasp</div>
+<div class="text-xs text-tertiary italic" style="">しっかりと掴む</div>
+</a>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-neutral-100">
+<div class="flex flex-col md:flex-row justify-between items-center px-10 py-24 w-full mx-auto max-w-screen-2xl">
+<div class="mb-10 md:mb-0">
+<div class="font-bold text-neutral-900 font-plus-jakarta-sans text-xl mb-4" style="">Moving Vocabulary</div>
+<p class="font-be-vietnam-pro text-[10px] tracking-widest uppercase text-neutral-500" style="">© 2024 Moving Vocabulary. Editorial Edition.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-be-vietnam-pro text-[10px] tracking-widest uppercase text-neutral-500 hover:text-neutral-900 transition-all" href="#" style="">Privacy</a>
+<a class="font-be-vietnam-pro text-[10px] tracking-widest uppercase text-neutral-500 hover:text-neutral-900 transition-all" href="#" style="">Terms</a>
+<a class="font-be-vietnam-pro text-[10px] tracking-widest uppercase text-neutral-500 hover:text-neutral-900 transition-all" href="#" style="">Cookie</a>
+</div>
+</div>
+</footer>
+</body></html>
